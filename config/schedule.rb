@@ -24,7 +24,14 @@ require File.expand_path(File.dirname(__FILE__) + "/environment")
 rails_env = Rails.env.to_sym
 set :environment, rails_env
 set :output, 'log/cron.log'
-every 1.minute do
+
+# 日本時間に設定
+def jst(time)
+  Time.zone = 'Asia/Tokyo'
+  Time.zone.parse(time).localtime($system_utc_offset)
+end
+
+every 1.days, at: jst('10:00 am') do
   begin
     runner "Batch::SendUserMail.send_user_mail"
   rescue => e
