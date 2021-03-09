@@ -18,9 +18,8 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-# ランナージョブタイプを設定
+# ランナージョブタイプを設定：設定しないとrails runnerが使用できない
 set :runner_command, "rails runner"
-# env :PATH, ENV['PATH']
 require File.expand_path(File.dirname(__FILE__) + "/environment")
 rails_env = Rails.env.to_sym
 set :environment, rails_env

@@ -1,5 +1,8 @@
 class Batch::SendUserMail
   def self.send_user_mail
-    p "メールを送信しました"
+    @users = User.all
+    @users.each do |user|
+      UserMailer.daily_mail(user).deliver_now
+    end
   end
 end
